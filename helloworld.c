@@ -1,8 +1,13 @@
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
+#include <string.h>
+// #include <errno.h>
+#include <math.h>
 
 #define WIDTH 20
 #define HEIGHT 20
+#define PPM_SCALAR 10
 
 typedef float Layer[HEIGHT][WIDTH];
 
@@ -12,8 +17,8 @@ static inline int clamp_int(int x, int low, int high)
 	// 把坐标限制在图片范围的工具
 	if (x < low) {
 		x = low;
-	}
-	if (x > high) {
+	} 
+	if (x > high) { 
 		x = high;
 	}
 	return x;
@@ -35,6 +40,29 @@ void layer_fill_rectangle(Layer layer, int x, int y, int w, int h, float value)
 		} 
 	}
 }
+
+void layer_save_as_ppm(Layer layer, const char *file_path)
+{
+	FILE *f = fopen(file_path, "wb");
+	if (f == NULL) {
+		fprintf(stderr, "ERROR: Could not open file %s: %m\n",file_path);
+		exit(1);
+	}
+	fprintf(f, "P6\n%d %d 255\n",WIDTH, HEIGHT);
+	for(int y = 0; y < HEIGHT; ++y) {
+		for(int x =0; x < WIDTH; ++x) {
+			char pixel[3] = {
+				(char) floorf(255 * layer[y][x]), // 红通道
+				0, // 绿通道
+				0  // 蓝通道
+			};
+			fwrite(pixel, sizeof(pixel), 1, f);
+		}
+	}
+	fclose(f);
+}
+
+// 经典的前馈神经元
 float neuron_forward(Layer inputs, Layer weights)
 {
 	float output = 0.0f;
@@ -51,8 +79,10 @@ static Layer weights;
 	
 int main ()
 {
-	printf("Hello World!\n");
-	float output = neuron_forward(inputs,weights);
-	printf("output = %f\n",output);
+//	printf("Hello World!\n");
+//	float output = neuron_forward(inputs,weights);
+//	printf("output = %f\n",output);
+	layer_fill_rectangle(inputs, 0, 0, WIDTH/2, HEIGHT/2, 1.0f);
+	layer_save_as_ppm(inputs,"inputs.ppm");
 	return 0;
 }  
