@@ -4,6 +4,7 @@
 #include <string.h>
 // #include <errno.h>
 #include <math.h>
+#include <limits.h>
 
 #define WIDTH 50
 #define HEIGHT 50
@@ -118,7 +119,50 @@ int rand_range(int low, int high)
 
 static Layer inputs;
 static Layer weights;
+
+void layer_random_rectangle(Layer layer)
+{
+	layer_fill_rectangle(layer, 0, 0, WIDTH, HEIGHT, 0.0f);
+	int x = rand_range(0, WIDTH);
+	int y = rand_range(0, HEIGHT);
 	
+	int w = WIDTH - x;
+	if (w < 2) {
+		w = 2;
+	}
+	w = rand_range(1,w);
+
+	int h = HEIGHT - y;
+	if (y < 2) {
+		y = 2;
+	}
+	y = rand_range(1,y);
+
+	layer_fill_rectangle(layer, x, y, w, h, 1.0f);
+}
+
+void layer_random_circle(Layer layer)
+{
+	layer_fill_rectangle(layer, 0, 0, WIDTH, HEIGHT, 0.0f);
+	int circle_x = rand_range(0, WIDTH);
+	int circle_y = rand_range(0, HEIGHT);
+	int r = INT_MAX;
+	if (r > circle_x) {
+		r = circle_x;
+	}
+	if (r > circle_y) {
+		r = circle_y;
+	}
+	if (r > WIDTH - circle_x) {
+		r = WIDTH - circle_x;
+	}
+	if (r > HEIGHT - circle_y) {
+		r = HEIGHT - circle_y;
+	}
+	r = rand_range(1,r);
+	layer_fill_circle(layer, circle_x, circle_y, r, 1.0f);
+}
+
 int main ()
 {
 //	printf("Hello World!\n");
@@ -131,18 +175,14 @@ int main ()
 	//layer_save_as_ppm(inputs, "inputs.ppm");
 	char file_path[256];
 	for (int i = 0; i < SAMPLE_SIZE; ++i) {
-		printf("[INFO]: generating rect %d\n", i);
+		printf("[INFO]: generating circle %d\n", i);
 		// 先打印目前的信息，然后再画出来
-		layer_fill_rectangle(inputs, 0, 0, WIDTH, HEIGHT, 0.0f);
-		int x = rand_range(0, WIDTH);
-		int y = rand_range(0, HEIGHT);
-		int w = rand_range(1, WIDTH);
-		int h = rand_range(1, HEIGHT);
-		layer_fill_rectangle(inputs, x, y, w, h, 1.0f);
 
-		snprintf(file_path, sizeof(file_path), "rect-%02d.bin", i);
+		layer_random_circle(inputs);
+
+		snprintf(file_path, sizeof(file_path), "circle-%02d.bin", i);
 		layer_save_as_bin(inputs, file_path);
-		snprintf(file_path, sizeof(file_path), "rect-%02d.ppm", i);
+		snprintf(file_path, sizeof(file_path), "circle-%02d.ppm", i);
 		layer_save_as_ppm(inputs, file_path);
 	}
 	return 0;
