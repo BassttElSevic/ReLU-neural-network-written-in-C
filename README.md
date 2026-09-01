@@ -1,3 +1,5 @@
+[简体中文](README.md) | [English](README_EN.md)
+
 # C-ReLU Shape Classifier
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&lines=Hello+there!;Welcome+to+my+project)](https://git.io/typing-svg)
@@ -8,7 +10,7 @@
 [![C](https://img.shields.io/badge/C-00599C?style=flat-square&logo=c&logoColor=white)](https://www.iso.org/standard/74528.html)
 [![ReLU](https://img.shields.io/badge/ReLU-激活函数-7B2FBE?style=flat-square&logo=brain&logoColor=white)](https://en.wikipedia.org/wiki/Rectifier_(neural_networks))
 
-(*BTW*,I trained it on [![ThinkPad](https://img.shields.io/badge/ThinkPad-EE2624?style=flat-square&logo=thinkpad&logoColor=white)](https://www.lenovo.com/us/en/thinkpad) and my cpu is [![Intel](https://img.shields.io/badge/Intel-0071C5?style=flat-square&logo=intel&logoColor=white)](https://www.intel.com/) and my OS is [![Linux](https://img.shields.io/badge/Linux-000000?style=flat-square&logo=linux&logoColor=white)](https://www.linux.org/)
+(*BTW*, I trained it on [![ThinkPad](https://img.shields.io/badge/ThinkPad-EE2624?style=flat-square&logo=thinkpad&logoColor=white)](https://www.lenovo.com/us/en/thinkpad) and my cpu is [![Intel](https://img.shields.io/badge/Intel-0071C5?style=flat-square&logo=intel&logoColor=white)](https://www.intel.com/) and my OS is [![Linux](https://img.shields.io/badge/Linux-000000?style=flat-square&logo=linux&logoColor=white)](https://www.linux.org/)
 
 [![GCC](https://img.shields.io/badge/GCC-FF6600?style=flat-square&logo=gcc&logoColor=white)](https://gcc.gnu.org/)
 [![CMake](https://img.shields.io/badge/CMake-064F8C?style=flat-square&logo=cmake&logoColor=white)](https://cmake.org/)
@@ -141,4 +143,5 @@ data/          训练产物（被 git 忽略）
 MIT License，版权归 Basstt ElSevic 所有。详见 [LICENSE](LICENSE)。
 
 ## Choose life
+
 <img width="1080" height="723" alt="ChooseLife" src="https://github.com/user-attachments/assets/c5b28f73-074d-4b5d-9498-a77cd4d51561" />
