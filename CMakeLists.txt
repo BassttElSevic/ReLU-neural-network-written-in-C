@@ -4,6 +4,9 @@ project(shape_classifier C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+# 生成 compile_commands.json,供 clangd / LSP 读取正确的 include 路径,消除编辑器里的误报
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
