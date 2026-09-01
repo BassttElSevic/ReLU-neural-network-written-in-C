@@ -140,7 +140,7 @@ data/          训练产物（被 git 忽略）
 
 ## License
 
-MIT License，版权归 Basstt ElSevic 所有。详见 [LICENSE](LICENSE)。
+MIT License，版权归 Basstt ElSevic <img width="500" height="500" alt="图片" src="https://github.com/user-attachments/assets/c5a5ea84-8b31-4641-81b1-cea08a739ba7" /> 所有。详见 [LICENSE](LICENSE)。
 
 ## Choose life
 
