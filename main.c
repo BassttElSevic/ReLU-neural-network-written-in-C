@@ -109,6 +109,13 @@ float neuron_forward(Layer inputs, Layer weights)
 	return output;
 }
 
+// 一个我们需要随机用的
+int rand_range(int low, int high)
+{
+	assert(low < high);
+	return rand() % (high - low) + low;
+}
+
 static Layer inputs;
 static Layer weights;
 	
@@ -120,7 +127,23 @@ int main ()
 //	layer_fill_rectangle(inputs, 0, 0, WIDTH/2, HEIGHT/2, 1.0f);//
 	// layer_fill_circle(inputs, WIDTH/2, HEIGHT/2, WIDTH/2, 1.0f);
 	// layer_save_as_ppm(inputs,"inputs.ppm");
-	layer_fill_circle(inputs,WIDTH / 2, HEIGHT / 2, WIDTH / 2, 1.0f);
-	layer_save_as_bin(inputs, "inputs.ppm");
+	//layer_fill_circle(inputs,WIDTH / 2, HEIGHT / 2, WIDTH / 2, 1.0f);
+	//layer_save_as_ppm(inputs, "inputs.ppm");
+	char file_path[256];
+	for (int i = 0; i < SAMPLE_SIZE; ++i) {
+		printf("[INFO]: generating rect %d\n", i);
+		// 先打印目前的信息，然后再画出来
+		layer_fill_rectangle(inputs, 0, 0, WIDTH, HEIGHT, 0.0f);
+		int x = rand_range(0, WIDTH);
+		int y = rand_range(0, HEIGHT);
+		int w = rand_range(1, WIDTH);
+		int h = rand_range(1, HEIGHT);
+		layer_fill_rectangle(inputs, x, y, w, h, 1.0f);
+
+		snprintf(file_path, sizeof(file_path), "rect-%02d.bin", i);
+		layer_save_as_bin(inputs, file_path);
+		snprintf(file_path, sizeof(file_path), "rect-%02d.ppm", i);
+		layer_save_as_ppm(inputs, file_path);
+	}
 	return 0;
 }  
