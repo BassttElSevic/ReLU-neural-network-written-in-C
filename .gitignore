@@ -1,18 +1,67 @@
-# 构建产物
+# ============ 操作系统生成的文件 ============
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ============ 编译器/构建产物 ============
 build/
 *.o
+*.obj
+*.exe
+*.out
 shape_classifier
-
-# 训练生成的样本、模型、曲线数据
-data/
-
-# 旧的编译产物
 neurou
 
-# 随机训练样本(旧格式)
+# ============ 训练生成的数据(样本/模型/曲线) ============
+data/
 *.ppm
 *.bin
 
-# Python 缓存
+# ============ Python ============
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+*.whl
+venv/
+.venv/
+env/
+
+# ============ 编辑器/IDE ============
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+.ftppass
+.project
+.classpath
+.settings/
+
+# ============ CMake ============
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+Testing/
+install_manifest.txt
+
+# ============ 日志和临时文件 ============
+*.log
+*.tmp
+*.bak
+*.orig
+
+# ============ 编辑器/语言服务器缓存 ============
+.cache/
+.ccls-cache/
+.compile_commands.json
