@@ -140,7 +140,7 @@ data/          training artifacts (ignored by git)
 
 ## License
 
-MIT License, copyright by Basstt ElSevic. See [LICENSE](LICENSE).
+MIT License, copyright by <img width="500" height="500" alt="图片" src="https://github.com/user-attachments/assets/c5a5ea84-8b31-4641-81b1-cea08a739ba7" /> Basstt ElSevic. See [LICENSE](LICENSE).
 
 ## Choose life
 
