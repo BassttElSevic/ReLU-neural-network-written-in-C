@@ -1,7 +1,18 @@
-# 生成的图片和二进制数据（随机训练样本）
+# 构建产物
+build/
+*.o
+shape_classifier
+
+# 训练生成的样本、模型、曲线数据
+data/
+
+# 旧的编译产物
+neurou
+
+# 随机训练样本(旧格式)
 *.ppm
 *.bin
 
-# 编译产物
-neurou
-*.o
+# Python 缓存
+__pycache__/
+*.pyc
