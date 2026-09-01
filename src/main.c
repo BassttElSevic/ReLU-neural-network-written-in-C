@@ -7,6 +7,13 @@
 #include <string.h>
 #include <omp.h>
 
+/* 跨平台目录创建所需的头文件 */
+#ifdef _WIN32
+#include <direct.h>   /* Windows: _mkdir */
+#else
+#include <sys/stat.h> /* POSIX(macOS/Linux): mkdir */
+#endif
+
 /* ================= 训练超参数 =================
  * 这些是"调参":改它们会影响训练速度和质量。
  *   TRAIN_SAMPLES 每轮用多少样本训练(不是越多越好,够用即可)
@@ -42,6 +49,24 @@ static void write_curve_csv(const char *path)
                 e + 1, train_loss_history[e], train_acc_history[e], val_acc_history[e]);
     fclose(f);
     printf("[INFO] 训练曲线已写入 %s\n", path);
+}
+
+/* 确保 data/ 目录存在。
+ * 因为 .gitignore 忽略了 data/(训练产物不进版本库),用户 clone 下来后
+ * 本地并没有这个目录,若程序直接往里写文件,fopen 会失败、报 open file 错误。
+ * 所以在程序启动时用 mkdir 自动创建它,用户不需要手动建目录。
+ * 已存在时 mkdir 会返回 -1(EEXIST),这里忽略即可。 */
+static void ensure_data_dir(void)
+{
+#ifdef _WIN32
+    /* Windows 用 _mkdir(单参数,不需要权限位),direct.h 已在文件顶部包含 */
+    _mkdir("data");
+#else
+    /* POSIX(macOS/Linux)用 mkdir:路径 + 权限位。
+     * 用 <sys/stat.h> 的符号常量表示 0755(所有者 rwx,组 r-x,其他 r-x),
+     * 比裸八进制更自解释、更可移植。 */
+    mkdir("data", S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+#endif
 }
 
 /* ============ 训练模式: 训练并保存模型 ============ */
@@ -209,6 +234,10 @@ int main(int argc, char **argv)
      *   ./shape_classifier predict      -> argc=2, mode="predict"
      * argv[0] 永远是程序自己的名字。 */
     const char *mode = (argc > 1) ? argv[1] : "train";
+
+    /* 先确保 data/ 目录存在,再执行训练/预测。
+     * 这样用户 clone 下来直接运行即可,无需手动建目录。 */
+    ensure_data_dir();
 
     /* strcmp 比较字符串是否相等。等于 0 表示相等。 */
     if (strcmp(mode, "train") == 0) {
